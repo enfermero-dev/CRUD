@@ -1,16 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='es'>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/styles/style.css">
-    <script src="assets/scripts/script.js"></script>
-    <title>CRUD</title>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta name='author' content='Marcelo Mendoza'>
+    <meta name='description' content='CRUD project for my bootcamp'>
+    <meta name='keywords' content='CRUD, bootcamp, project, html, css, responsive'>
+    <!-- The 'defer' argument runs the script after page loading, so it ensures -->
+    <!-- all elements are in the document before editing them. -->
+    <script src='assets/scripts/script.js' defer></script>
+    <link rel='stylesheet' href='assets/styles/style.css'>
+    <title>SuperHERO Power Registering Website</title>
 </head>
 <body>
     <header>
-        <img src="" alt="">
+        <div class='header-title'>
+            <h1 id="welcome">Bienvenido</h1>
+            <p>Sistema de Registro de Superobjetos</p>
+        </div>
     </header>
+    <div class='main-layout'>
+        <main>
+            <h3>Sistema de control rápido de equipamiento del traje</h3>
+            <p>Agregue a la siguiente tabla hasta 10 características que requiere en su traje inteligente; estos serán desarrollados y luego descargados en él presionando el botón 'Sincronizar traje'.</p>
+            <p class="aside-note">
+                MegaTECH inc. realizará los cargos a su cuenta una vez descargados los elementos solicitados. Si tiene dudas, contáctese con nuestro servicio al cliente mediante su comunicador incorporado.
+            </p>
+            <div class='superitems'>
+                <div class="edit-buttons">
+                    <input type="button" value="Añadir" class="edit-button">
+                    <input type="button" value="Editar" class="edit-button">
+                    <input type="button" value="Eliminar" class="edit-button">
+                </div>
+                <table class='table-superitems'>
+                    <tbody id="data">
+                        <tr>
+                            <th>Prioridad</th>
+                            <th>Nombre</th>
+                            <th>Descripción corta</th>
+                            <th>Características adicionales</th>
+                        </tr>
+                        <tr class="editingArea" id="editingArea">
+                            <td><input type="text" name="newPriority" id="newPriority" class="editing-text-box"></td>
+                            <td><input type="text" name="newName" id="newName" class="editing-text-box"></td>
+                            <td><input type="text" name="newDescription" id="newDescription" class="editing-text-box"></td>
+                            <td><input type="text" name="newFeatures" id="newFeatures" class="editing-text-box"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+        <aside>
+            <h2>Información de Usuario</h2>
+            <label for="userName">Nombre <input type='text' name='userName' id='userName' class='input-box' placeholder='Su nombre'></label>
+        </aside>
+    </div>
 </body>
 </html>

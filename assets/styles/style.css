@@ -1,0 +1,193 @@
+/* 2023 Marcelo Mendoza */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@200&display=swap');
+
+:root {
+    /* Theme Colors */
+    --color-primary-normal: black;
+    --color-primary-inverted: white;
+    --color-bg-normal: white;
+    --color-bg-inverted: black;
+    --color-sky-blue: #afccd3;
+    --color-table-border-normal: #cccccc;
+    --color-table-border-focused: #63b7cc;
+    --color-edit-button-bg-normal: #63b7cc;
+    --color-edit-button-bg-focused: #b4f0ff;
+    --color-edit-button-primary-normal: #00556a;
+    --color-editing-area-bg: rgb(188, 255, 215);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Kanit', sans-serif;
+    background-color: var(--color-bg-normal);
+    color: var(--color-primary-normal);
+}
+
+/* Top header */
+header {
+    width: 100%;
+    height: 600px;
+    background-size: cover;
+    background-image: linear-gradient(rgba(0,0,0,0),  rgba(0,0,0,0) 40% ,rgba(0,0,0,1)), url('../img/hight-tech-ui.png');
+}
+
+.header-title :is(h1, h2, h3, h4, h5, h6, p) {
+    color: var(--color-primary-inverted);
+}
+
+.aside-note {
+    font-style: italic;
+    font-size: smaller;
+}
+
+/* Input box formatting */
+
+.input-box {
+    /* color:  */
+    padding: 10px 5px 10px 20px;
+    font-size: large;
+    border-radius: 20px;
+    border: 1px solid var(--color-table-border-normal);
+}
+
+.input-box:hover {
+    border: 1px solid var(--color-table-border-focused);
+}
+
+/* Main section */
+.header-title {
+    color: var(--color-primary-normal);
+    font-size: x-large;
+    position: absolute;
+    top: 450px;
+    width: 90%;
+    text-align: right;
+    font-weight: bold;
+}
+
+.main-layout {
+    margin: 20px;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.superitems {
+    margin-top: 20px;
+}
+
+.table-superitems {
+    margin-bottom: 20px;
+    border-spacing: 0;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.table-superitems td {
+    margin: 0;
+}
+
+.placeholder-text {
+    font-style: italic;
+    text-align: center;
+    font-weight: bold;
+    color: gray;
+}
+
+tr:hover {
+    background-color: var(--color-edit-button-bg-focused);
+}
+
+.item-selected {
+    background-color: var(--color-edit-button-bg-normal);
+}
+
+th {
+    background-color: var(--color-bg-inverted);
+    color: var(--color-primary-inverted);
+    font-size: large;
+}
+
+th, td {
+    border: solid 1px var(--color-primary-normal);
+    padding: 1px 20px;
+}
+
+/* Editing area */
+
+.edit-buttons {
+    margin-bottom: 10px;
+}
+
+.edit-button {
+    padding: 10px 30px;
+    border-radius: 20px;
+    border: none;
+    background-color: var(--color-edit-button-bg-normal);
+    color: var(--color-edit-button-primary-normal);
+    font-weight: bold;
+    font-size: large;
+}
+
+.edit-button:hover {
+    background-color: var(--color-edit-button-bg-focused);
+}
+
+.editingArea {
+    background-color: var(--color-editing-area-bg);
+}
+
+.editing-text-box {
+    width: 100%;
+    margin: 5px;
+    font-size: large;
+    padding: 5px 10px;
+}
+
+/* Right panel formatting */
+
+aside {
+    margin-left: 20px;
+    border: solid 1px var(--color-primary-normal);
+    min-width: 300px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+label {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 10px;
+    align-items: center;
+    font-size: large;
+}
+
+@media (max-width:720px) {
+    .main-layout {
+        flex-wrap: wrap;
+    }
+    aside {
+        margin-top: 20px;
+        margin-left: 0;
+        min-width: none;
+        width: 100%;
+    }
+}
+
+aside :is(h1, h2, h3, h4, h5, h6) {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+aside :not(h1, h2, h3, h4, h5, h6) {
+    width: 100%;
+    margin-bottom: 2px;
+}
