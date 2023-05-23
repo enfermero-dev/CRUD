@@ -1,39 +1,43 @@
 <!DOCTYPE html>
-<html lang='es'>
+<html lang="es">
+
 <head>
-    <meta charset='UTF-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <meta name='author' content='Marcelo Mendoza'>
-    <meta name='description' content='CRUD project for my bootcamp'>
-    <meta name='keywords' content='CRUD, bootcamp, project, html, css, responsive'>
-    <!-- The 'defer' argument runs the script after page loading, so it ensures -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Marcelo Mendoza">
+    <meta name="description" content="CRUD project for my bootcamp">
+    <meta name="keywords" content="CRUD, bootcamp, project, html, css, responsive">
+    <!-- The "defer" argument runs the script after page loading, so it ensures -->
     <!-- all elements are in the document before editing them. -->
-    <script src='assets/scripts/script.js' defer></script>
-    <link rel='stylesheet' href='assets/styles/style.css'>
+    <script src="assets/scripts/script.js" defer></script>
+    <link rel="stylesheet" href="assets/styles/style.css">
     <title>SuperHERO Power Registering Website</title>
 </head>
+
 <body>
     <header>
-        <div class='header-title'>
+        <div class="header-title">
             <h1 id="welcome">Bienvenido</h1>
             <p>Sistema de Registro de Superobjetos</p>
         </div>
     </header>
-    <div class='main-layout'>
+    <div class="main-layout">
         <main>
             <h3>Sistema de control rápido de equipamiento del traje</h3>
-            <p>Agregue a la siguiente tabla hasta 10 características que requiere en su traje inteligente; estos serán desarrollados y luego descargados en él presionando el botón 'Sincronizar traje'.</p>
+            <p>Agregue a la siguiente tabla hasta 10 características que requiere en su traje inteligente; estos serán
+                desarrollados y luego descargados en él presionando el botón "Sincronizar traje".</p>
             <p class="aside-note">
-                MegaTECH inc. realizará los cargos a su cuenta una vez descargados los elementos solicitados. Si tiene dudas, contáctese con nuestro servicio al cliente mediante su comunicador incorporado.
+                MegaTECH inc. realizará los cargos a su cuenta una vez descargados los elementos solicitados. Si tiene
+                dudas, contáctese con nuestro servicio al cliente mediante su comunicador incorporado.
             </p>
-            <div class='superitems'>
+            <div class="superitems">
                 <div class="edit-buttons">
-                    <input type="button" value="Añadir" class="edit-button">
-                    <input type="button" value="Editar" class="edit-button">
-                    <input type="button" value="Eliminar" class="edit-button">
+                    <input type="button" value="Añadir" class="edit-button" id="btAddItem">
+                    <input type="button" value="Editar" class="edit-button" id="btEditItem">
+                    <input type="button" value="Eliminar" class="edit-button" id="btDeleteItem">
                 </div>
-                <table class='table-superitems'>
+                <table class="table-superitems">
                     <tbody id="data">
                         <tr>
                             <th>Prioridad</th>
@@ -42,19 +46,42 @@
                             <th>Características adicionales</th>
                         </tr>
                         <tr class="editingArea" id="editingArea">
-                            <td><input type="text" name="newPriority" id="newPriority" class="editing-text-box"></td>
-                            <td><input type="text" name="newName" id="newName" class="editing-text-box"></td>
-                            <td><input type="text" name="newDescription" id="newDescription" class="editing-text-box"></td>
-                            <td><input type="text" name="newFeatures" id="newFeatures" class="editing-text-box"></td>
+                            <td><input type="text" name="newPriority" id="priority" class="editing-text-box newItemtextBox"></td>
+                            <td><input type="text" name="newName" id="name" class="editing-text-box newItemtextBox"></td>
+                            <td><input type="text" name="newDescription" id="description" class="editing-text-box newItemtextBox">
+                            </td>
+                            <td><input type="text" name="newFeatures" id="features" class="editing-text-box newItemtextBox"></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </main>
         <aside>
-            <h2>Información de Usuario</h2>
-            <label for="userName">Nombre <input type='text' name='userName' id='userName' class='input-box' placeholder='Su nombre'></label>
+            <div class="aside-panel">
+                <div>
+                    <h2>Información de Usuario</h2>
+                    <label for="userName">Nombre <input type="text" name="userName" id="userName" class="input-box"
+                            placeholder="Su nombre"></label>
+                </div>
+                <div>
+                    <p class="warning">ADVERTENCIA: Este botón eliminará de forma inmediata toda la información guardada.</p>
+                    <input type="button" value="Borrado de emergencia" class="edit-button red" id="btDelete">
+                </div>
+            </div>
         </aside>
+        <div class="modal-form hidden" id="modalForm">
+            <div class="modal-form-content">
+                <h2 id="status-title">Le damos la bienvenida al sistema de control de superobjetos - Traje v5.42</h2>
+                <p id="status-text">No se han encontrado datos locales, pero se encontró una copia de seguridad remota.
+                    ¿Desea rellenar con los datos remotos? <br>Si no lo desea, puede comenzar con una lista en blanco.</p>
+                <div class="question-buttons">
+                    <input type="button" value="Si" id="btYes" class="edit-button">
+                    <input type="button" value="No" id="btNo" class="edit-button">
+                    <input type="button" value="Ok" id="btOk" class="edit-button hidden">
+                </div>
+            </div>
+        </div>
     </div>
 </body>
+
 </html>

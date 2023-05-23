@@ -12,6 +12,8 @@
     --color-table-border-normal: #cccccc;
     --color-table-border-focused: #63b7cc;
     --color-edit-button-bg-normal: #63b7cc;
+    --color-edit-button-bg-selected: #004e62;
+    --color-edit-button-bg-selected-lighter: #086278;
     --color-edit-button-bg-focused: #b4f0ff;
     --color-edit-button-primary-normal: #00556a;
     --color-editing-area-bg: rgb(188, 255, 215);
@@ -34,7 +36,7 @@ header {
     width: 100%;
     height: 600px;
     background-size: cover;
-    background-image: linear-gradient(rgba(0,0,0,0),  rgba(0,0,0,0) 40% ,rgba(0,0,0,1)), url('../img/hight-tech-ui.png');
+    background-image: linear-gradient(rgba(0,0,0,0),  rgba(0,0,0,0) 40% ,rgba(0,0,0,1)), url('../img/futuristic-ui.png');
 }
 
 .header-title :is(h1, h2, h3, h4, h5, h6, p) {
@@ -105,8 +107,18 @@ tr:hover {
     background-color: var(--color-edit-button-bg-focused);
 }
 
-.item-selected {
-    background-color: var(--color-edit-button-bg-normal);
+.selectable {
+    cursor: pointer;
+}
+
+.selected {
+    background-color: var(--color-edit-button-bg-selected);
+    color: var(--color-primary-inverted);
+}
+
+.selected:hover {
+    background-color: var(--color-edit-button-bg-selected-lighter);
+    color: var(--color-primary-inverted);
 }
 
 th {
@@ -117,7 +129,8 @@ th {
 
 th, td {
     border: solid 1px var(--color-primary-normal);
-    padding: 1px 20px;
+    padding: 5px 10px;
+    font-weight: bold;
 }
 
 /* Editing area */
@@ -136,6 +149,22 @@ th, td {
     font-size: large;
 }
 
+.red {
+    background-color: rgb(225, 103, 103);
+    color: var(--color-primary-inverted);
+}
+
+.red:hover {
+    background-color: rgb(214, 22, 22) !important;
+}
+
+.warning {
+    color: rgb(136, 2, 2);
+    font-size: small;
+    font-weight: bold;
+    margin: 10px;
+}
+
 .edit-button:hover {
     background-color: var(--color-edit-button-bg-focused);
 }
@@ -146,7 +175,7 @@ th, td {
 
 .editing-text-box {
     width: 100%;
-    margin: 5px;
+    margin: 5px 0;
     font-size: large;
     padding: 5px 10px;
 }
@@ -161,6 +190,13 @@ aside {
     border-radius: 10px;
 }
 
+.aside-panel {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 label {
     display: flex;
     flex-direction: row;
@@ -170,7 +206,7 @@ label {
     font-size: large;
 }
 
-@media (max-width:720px) {
+@media (max-width:950px) {
     .main-layout {
         flex-wrap: wrap;
     }
@@ -190,4 +226,40 @@ aside :is(h1, h2, h3, h4, h5, h6) {
 aside :not(h1, h2, h3, h4, h5, h6) {
     width: 100%;
     margin-bottom: 2px;
+}
+
+/* Modal form */
+
+.modal-form {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.7);
+    backdrop-filter: blur(5px);
+}
+
+.hidden {
+    display: none;
+}
+
+.modal-form-content {
+    position: relative;
+    background-color: var(--color-bg-normal);
+    border-radius: 20px;
+    border: solid 1px var(--color-table-border-normal);
+    top: 40%;
+    width: 90%;
+    padding: 20px;
+    margin: auto;
+}
+
+.modal-form-content p {
+    font-size: large;
+}
+
+.question-buttons {
+    margin: 20px;
+    text-align: center;
 }
