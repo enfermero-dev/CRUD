@@ -117,10 +117,12 @@ const selectWrapperFn = function (event) {
 
 function selectNone() {
     let elements = document.getElementsByClassName('selected');
-    elements[0].classList.remove('selected');
-    const getEditBoxes = document.getElementsByClassName('newItemtextBox');
-    for (let n = 0; n < getEditBoxes.length; n++) {
-        getEditBoxes[n].value = '';
+    if (elements.length > 0) {
+        elements[0].classList.remove('selected');
+        const getEditBoxes = document.getElementsByClassName('newItemtextBox');
+        for (let n = 0; n < getEditBoxes.length; n++) {
+            getEditBoxes[n].value = '';
+        }
     }
 }
 
@@ -139,7 +141,7 @@ function selectElement(element) {
     const getEquivalentEditBox = document.getElementsByClassName('newItemtextBox');
     // loop through each td element and add it to the getSelectedValues array
     for (let n = 0; n < tdElements.length; n++) {
-        if (getEquivalentEditBox[0].getAttribute('number')) {
+        if (!getEquivalentEditBox[0].getAttribute('number')) {
             const getSelectedValues = tdElements[n].innerText;
             getEquivalentEditBox[n].value = getSelectedValues;
         } else {
@@ -189,6 +191,14 @@ function calculateAll() {
             Number(multiplyByQtyElements[n].innerText) * Number(multiplyByValueElements[n].innerText.replace(/\./g, ""))
         )
     }
+    const calcTotal = document.getElementById('total');
+    const getSubTotals = document.getElementsByClassName('multiplyByTotal');
+    var valSum = 0;
+    for (n = 0; n < getSubTotals.length; n++) {
+        valSum += Number(getSubTotals[n].innerText.replace(/\./g, ""));
+    }
+    calcTotal.innerText = formatNumber(valSum);
+
 }
 
 function saveTestingData() {
@@ -354,7 +364,7 @@ function replaceItem() {
             setFocusFirstInput();
         }
     } else {
-        fAlert('Debe seleccionar antes un elemento para editar','warning');
+        fAlert('Debe seleccionar antes un elemento para editar', 'warning');
     }
 }
 
@@ -376,6 +386,7 @@ function deleteItem() {
         console.log('Deleted selected item');
         reenumerateItems();
         saveItems();
+        calculateAll();
     } else {
         // modalAlert('Advertencia', 'Seleccione antes un item para eliminar');
         fAlert('Seleccione antes un registro para eliminar', 'warning');

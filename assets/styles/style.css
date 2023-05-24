@@ -124,6 +124,10 @@ tr:hover {
     background-color: var(--color-table-darkened);
 }
 
+input.readonlyTextBox {
+    visibility: hidden;
+}
+
 .selectable {
     cursor: pointer;
 }
@@ -204,6 +208,26 @@ td {
     margin: 5px 0;
     font-size: large;
     padding: 5px 10px;
+}
+
+/* Table Footer */
+
+.table-footer {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    font-size: x-large;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.total {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.total:before {
+    content: "Total $ ";
 }
 
 /* Right panel formatting */
