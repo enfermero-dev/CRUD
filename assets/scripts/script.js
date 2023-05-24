@@ -119,7 +119,7 @@ function selectNone() {
     let elements = document.getElementsByClassName('selected');
     elements[0].classList.remove('selected');
     const getEditBoxes = document.getElementsByClassName('newItemtextBox');
-    for (let n = 0; n < tdElements.length; n++) {
+    for (let n = 0; n < getEditBoxes.length; n++) {
         getEditBoxes[n].value = '';
     }
 }
@@ -291,6 +291,7 @@ function addItem() {
         fAlert('Registro agregado', 'info');
         calculateAll();
         selectNone();
+        setFocusFirstInput();
     }
 }
 
@@ -349,11 +350,17 @@ function replaceItem() {
             document.getElementById('element-' + itemCounter).addEventListener('click', selectWrapperFn);
             saveItems();
             fAlert('Registro modificado', 'info');
-            calculateAll()
+            calculateAll();
+            setFocusFirstInput();
         }
     } else {
         fAlert('Debe seleccionar antes un elemento para editar','warning');
     }
+}
+
+function setFocusFirstInput() {
+    const inputBoxes = document.getElementsByClassName('newItemtextBox');
+    inputBoxes[0].focus();
 }
 
 function formatNumber(number) {
