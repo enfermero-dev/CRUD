@@ -9,8 +9,9 @@
     --color-bg-normal: white;
     --color-bg-inverted: black;
     --color-sky-blue: #afccd3;
-    --color-table-border-normal: #cccccc;
+    --color-table-border-normal: #dddddd;
     --color-table-border-focused: #63b7cc;
+    --color-table-darkened: rgba(0, 0, 0, 0.1);
     --color-edit-button-bg-normal: #63b7cc;
     --color-edit-button-bg-selected: #004e62;
     --color-edit-button-bg-selected-lighter: #086278;
@@ -34,9 +35,9 @@ body {
 /* Top header */
 header {
     width: 100%;
-    height: 600px;
+    height: 300px;
     background-size: cover;
-    background-image: linear-gradient(rgba(0,0,0,0),  rgba(0,0,0,0) 40% ,rgba(0,0,0,1)), url('../img/futuristic-ui.png');
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 1)), url('../img/desk.png');
 }
 
 .header-title :is(h1, h2, h3, h4, h5, h6, p) {
@@ -49,6 +50,18 @@ header {
 }
 
 /* Input box formatting */
+
+/* Delete arrow selector on input:number
+/* - Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* - Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
 
 .input-box {
     /* color:  */
@@ -67,7 +80,7 @@ header {
     color: var(--color-primary-normal);
     font-size: x-large;
     position: absolute;
-    top: 450px;
+    top: 150px;
     width: 90%;
     text-align: right;
     font-weight: bold;
@@ -81,11 +94,11 @@ header {
     justify-content: space-between;
 }
 
-.superitems {
+.table-area {
     margin-top: 20px;
 }
 
-.table-superitems {
+.table-items {
     margin-bottom: 20px;
     border-spacing: 0;
     border-collapse: collapse;
@@ -105,6 +118,10 @@ header {
 
 tr:hover {
     background-color: var(--color-edit-button-bg-focused);
+}
+
+.readonly {
+    background-color: var(--color-table-darkened);
 }
 
 .selectable {
@@ -127,10 +144,19 @@ th {
     font-size: large;
 }
 
-th, td {
+th,
+td {
     border: solid 1px var(--color-primary-normal);
     padding: 5px 10px;
     font-weight: bold;
+}
+
+.right-align {
+    text-align: right;
+}
+
+.price:before {
+    content: '$ ';
 }
 
 /* Editing area */
@@ -210,6 +236,7 @@ label {
     .main-layout {
         flex-wrap: wrap;
     }
+
     aside {
         margin-top: 20px;
         margin-left: 0;
@@ -236,7 +263,7 @@ aside :not(h1, h2, h3, h4, h5, h6) {
     left: 0;
     width: 100%;
     height: 100vh;
-    background-color: rgba(0,0,0,0.7);
+    background-color: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(5px);
 }
 
@@ -262,4 +289,48 @@ aside :not(h1, h2, h3, h4, h5, h6) {
 .question-buttons {
     margin: 20px;
     text-align: center;
+}
+
+/* Alerts */
+
+.alert-box {
+    transition: opacity 200ms linear;
+    transition: top 200ms;
+    opacity: 100;
+    position: fixed;
+    top: 92vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+}
+
+.alert-box p {
+    font-weight: bold;
+    font-size: large;
+    padding: 10px 20px;
+    box-shadow: 0 0 30px var(--color-table-border-normal);
+}
+
+.alert-box-hidden {
+    transition: 500ms linear;
+    opacity: 0;
+    top: 100vh;
+}
+
+.alert-box-info {
+    background-color: rgb(236, 255, 233);
+    border: solid 1px rgb(22, 112, 0);
+    color: rgb(22, 112, 0);
+}
+
+.alert-box-normal {
+    background-color: white;
+    border: solid 1px rgb(158, 158, 158);
+    color: rgb(158, 158, 158);
+}
+
+.alert-box-warning {
+    background-color: rgb(255, 233, 233);
+    border: solid 1px rgb(112, 0, 0);
+    color: rgb(112, 0, 0);
 }

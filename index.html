@@ -12,45 +12,45 @@
     <!-- all elements are in the document before editing them. -->
     <script src="assets/scripts/script.js" defer></script>
     <link rel="stylesheet" href="assets/styles/style.css">
-    <title>SuperHERO Power Registering Website</title>
+    <title>Presupuestos</title>
 </head>
 
-<body>
+<body id="main-body">
     <header>
         <div class="header-title">
             <h1 id="welcome">Bienvenido</h1>
-            <p>Sistema de Registro de Superobjetos</p>
+            <p>Generador de presupuestos</p>
+            <!-- <input type="button" value="testBtn" class="edit-button" onclick="fAlert('hola');"> -->
         </div>
     </header>
     <div class="main-layout">
         <main>
-            <h3>Sistema de control rápido de equipamiento del traje</h3>
-            <p>Agregue a la siguiente tabla hasta 10 características que requiere en su traje inteligente; estos serán
-                desarrollados y luego descargados en él presionando el botón "Sincronizar traje".</p>
+            <h3>Sistema de presupuestos </h3>
+            <p>Agregue elementos a la tabla, puede editar la información general en el apartado 'Información General'.</p>
             <p class="aside-note">
-                MegaTECH inc. realizará los cargos a su cuenta una vez descargados los elementos solicitados. Si tiene
-                dudas, contáctese con nuestro servicio al cliente mediante su comunicador incorporado.
+                Los datos se guardarán localmente, se eliminan si realiza una limpieza del navegador o si utiliza el modo incógnito.
             </p>
-            <div class="superitems">
+            <div class="table-area">
                 <div class="edit-buttons">
                     <input type="button" value="Añadir" class="edit-button" id="btAddItem">
-                    <input type="button" value="Editar" class="edit-button" id="btEditItem">
+                    <input type="button" value="Modificar" class="edit-button" id="btEditItem">
+                    <input type="button" value="Deseleccionar" class="edit-button" id="btDeselect">
                     <input type="button" value="Eliminar" class="edit-button" id="btDeleteItem">
                 </div>
-                <table class="table-superitems">
+                <table class="table-items">
                     <tbody id="data">
                         <tr>
-                            <th>Prioridad</th>
-                            <th>Nombre</th>
-                            <th>Descripción corta</th>
-                            <th>Características adicionales</th>
+                            <th>Cantidad</th>
+                            <th>Item</th>
+                            <th>Precio unitario</th>
+                            <th>Precio total</th>
                         </tr>
                         <tr class="editingArea" id="editingArea">
-                            <td><input type="text" name="newPriority" id="priority" class="editing-text-box newItemtextBox"></td>
-                            <td><input type="text" name="newName" id="name" class="editing-text-box newItemtextBox"></td>
-                            <td><input type="text" name="newDescription" id="description" class="editing-text-box newItemtextBox">
+                            <td><input type="text" id="field1" class="editing-text-box newItemtextBox" data-classes="multiplyByQty"></td>
+                            <td><input type="text" id="field2" class="editing-text-box newItemtextBox"></td>
+                            <td><input type="number" id="field3" class="editing-text-box newItemtextBox" data-classes="right-align price multiplyByValue">
                             </td>
-                            <td><input type="text" name="newFeatures" id="features" class="editing-text-box newItemtextBox"></td>
+                            <td><input type="text" id="totalValue" class="editing-text-box newItemtextBox readonlyTextBox" data-classes="multiplyByTotal right-align price" disabled></td>
                         </tr>
                     </tbody>
                 </table>
@@ -59,21 +59,27 @@
         <aside>
             <div class="aside-panel">
                 <div>
-                    <h2>Información de Usuario</h2>
-                    <label for="userName">Nombre <input type="text" name="userName" id="userName" class="input-box"
-                            placeholder="Su nombre"></label>
+                    <h2>Información General</h2>
+                    <label for="userName">Nombre <input type="text" name="userName" id="userName" class="input-box infoTextBox"placeholder="Su nombre"></label>
+                    <label for="userBusiness">Empresa <input type="text" name="userBusiness" id="userBusiness" class="input-box infoTextBox" placeholder="Nombre de su empresa"></label>
+                    <label for="userProjectName">Nombre proyecto<input type="text" name="userProjectName" id="userProjectName" class="input-box infoTextBox" placeholder="Nombre del proyecto"></label>
+                    <label for="userProjectCode">Código proyecto<input type="text" name="userProjectCode" id="userProjectCode" class="input-box infoTextBox" placeholder="Código (opcional)"></label>
+                    <label for="projectDestName">Destinatario<input type="text" name="projectDestName" id="projectDestName" class="input-box infoTextBox" placeholder="Nombre del destinatario"></label>
+                    <label for="projectDestBusiness">Empresa del destinatario<input type="text" name="projectDestBusiness" id="projectDestBusiness" class="input-box infoTextBox" placeholder="Nombre de la empresa"></label>
+                    <label for="projectStartDate">Fecha de emisión <input type="date" name="projectStartDate" id="projectStartDate" class="input-box infoTextBox" placeholder="Su nombre"><input type="button" value="Hoy" id="btToday" class="edit-button"></label>
+                    <label for="projectEndDate">Fecha de vigencia <input type="date" name="projectEndDate" id="projectEndDate" class="input-box infoTextBox" placeholder="Su nombre"></label>
                 </div>
                 <div>
                     <p class="warning">ADVERTENCIA: Este botón eliminará de forma inmediata toda la información guardada.</p>
-                    <input type="button" value="Borrado de emergencia" class="edit-button red" id="btDelete">
+                    <input type="button" value="Limpiar todo" class="edit-button red" id="btDelete">
                 </div>
             </div>
         </aside>
         <div class="modal-form hidden" id="modalForm">
             <div class="modal-form-content">
-                <h2 id="status-title">Le damos la bienvenida al sistema de control de superobjetos - Traje v5.42</h2>
-                <p id="status-text">No se han encontrado datos locales, pero se encontró una copia de seguridad remota.
-                    ¿Desea rellenar con los datos remotos? <br>Si no lo desea, puede comenzar con una lista en blanco.</p>
+                <h2 id="status-title">Le damos la bienvenida al creador de presupuestos</h2>
+                <p id="status-text">No se han encontrado datos locales. Recuerde que esta aplicación sólo trabaja con datos que se almacenan en su navegador, y estos se eliminarán si realiza una limpieza de su navegador o activa el modo incógnito.
+                    ¿Desea rellenar con datos de demostración? <br>Si no lo desea, se generará una tabla en blanco.</p>
                 <div class="question-buttons">
                     <input type="button" value="Si" id="btYes" class="edit-button">
                     <input type="button" value="No" id="btNo" class="edit-button">
