@@ -11,6 +11,7 @@ function init() {
     fBindID('btToday', 'click', fillDateToday);
     fBindID('btDeselect', 'click', selectNone);
     fBindID('btEditItem', 'click', replaceItem);
+    fBindID('btPrint', 'click', print);
     console.log('[  READY  ]\n\nCall "saveTestingData()" from console to create test data, or "deleteSavedData()" to clear local data ');
 }
 
@@ -141,7 +142,7 @@ function selectElement(element) {
     const getEquivalentEditBox = document.getElementsByClassName('newItemtextBox');
     // loop through each td element and add it to the getSelectedValues array
     for (let n = 0; n < tdElements.length; n++) {
-        if (!getEquivalentEditBox[0].getAttribute('number')) {
+        if (!getEquivalentEditBox[0].getAttribute('type') === 'number') {
             const getSelectedValues = tdElements[n].innerText;
             getEquivalentEditBox[n].value = getSelectedValues;
         } else {
@@ -497,6 +498,59 @@ function fAlert(message, type) {
     const createdAlert = document.getElementById(alertID);
     setTimeout(function () { createdAlert.classList.remove('alert-box-hidden'); 0 })
     setTimeout(function () { createdAlert.classList.add('alert-box-hidden'); }, 3000)
+}
+
+function print() {
+    var divContents = `
+    <h1 class="print-heading">Presupuesto</h1>
+    <h2 class="print-subheading">${document.getElementById('userBusiness').value} </h2>
+    <h4 class="print-subheading">${document.getElementById('userName').value} </h4>
+    <div class="print-space"></div>
+    <hr>
+    <div class="flex-row">
+        <div class="flex-col">
+            <h4 class="print-subheading">A nombre de: ${document.getElementById('userProjectName').value} </h4>
+            <h4 class="print-subheading">Empresa: ${document.getElementById('projectDestBusiness').value} </h4>
+        </div>
+        <div class="flex-col">
+            <h4 class="print-subheading">Nombre del proyecto: ${document.getElementById('userProjectName').value} </h4>
+            <h4 class="print-subheading">Código: ${document.getElementById('userProjectCode').value} </h4>
+        </div>
+    </div>
+    <div class="print-space"></div>
+    <h2>Estimado/a ${document.getElementById('projectDestName').value},</h2>
+    <p>A continuación, se detalla el presupuesto para el proyecto <strong>${document.getElementById('userProjectName').value}</strong>, vigente desde el ${document.getElementById('projectStartDate').value} hasta el ${document.getElementById('projectEndDate').value}.</p>
+    <div class="print-space"></div>
+    <table class="print-table">
+        <tbody id="tableContentsContainer">
+            <tr>
+                <th>Cantidad</th>
+                <th>Item</th>
+                <th>Precio unitario</th>
+                <th>Precio total</th>
+            </tr>
+        </tbody>
+    </table>
+    <h3 class="right-align">Total: $ ${document.getElementById('total').innerText}</h3>
+    <div class="print-space"></div>
+    <p>Agradecemos comunicarse con nosotros para aceptar lo propuesto antes de la fecha de vigencia.</p>
+    <p>Atentamente, </p>
+    <div class="print-space"></div>
+    <div class="print-space"></div>
+    <h3>${document.getElementById('userName').value}, ${document.getElementById('userBusiness').value}.</h3>
+    `;
+    var printWindow = window.open('', '', 'height=800,width=800');
+    printWindow.document.write('<html><head><link rel="stylesheet" href="assets/styles/style.css"><title>Print Contents</title>');
+    printWindow.document.write('</head><body class="print-body">');
+    printWindow.document.write(divContents);
+    printWindow.document.write('</body></html>');
+    // Fill the table with the data on the main table
+    const tableContents = document.getElementsByClassName('selectable');
+    for(var n = 0; n < tableContents.length; n++) {
+        printWindow.document.getElementById('tableContentsContainer').appendChild(tableContents[n].cloneNode(true));
+    }
+    printWindow.document.close();
+    setTimeout(function () { printWindow.print(); }, 500);
 }
 
 init();
