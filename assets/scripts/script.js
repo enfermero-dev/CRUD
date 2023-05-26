@@ -1,7 +1,7 @@
 function init() {
-    loadUserInfo();
-    loadTableData();
-    fBindInputBoxes();
+    loadUserInfo(); // Carga la información general de la tabla anexa
+    loadTableData(); // Carga la información de la tabla principal
+    fBindInputBoxes(); // Asigna el evento keypress('enter') para añadir un registro a cada cuadro de texto
     fBindID('btYes', 'click', saveTestingData);
     fBindID('btNo', 'click', hideModal);
     fBindID('btDelete', 'click', deleteSavedData);
@@ -12,14 +12,15 @@ function init() {
     fBindID('btDeselect', 'click', selectNone);
     fBindID('btEditItem', 'click', replaceItem);
     fBindID('btPrint', 'click', print);
-    console.log('[  READY  ]\n\nCall "saveTestingData()" from console to create test data, or "deleteSavedData()" to clear local data ');
 }
 
 function fBindID(elementId, event, method) {
+    // Atajo para asignar un evento ('click') a un elemento por su ID
     document.getElementById(elementId).addEventListener(event, method);
 }
 
 function fBindInputBoxes() {
+    // Asigna el evento keypress('enter') para añadir un registro a cada cuadro de texto
     const inputBoxes = document.getElementsByClassName('newItemtextBox');
     for (n = 0; n < inputBoxes.length; n++) {
         inputBoxes[n].addEventListener('keypress', addItemWrapper);
@@ -55,10 +56,11 @@ function loadUserInfo() {
 }
 
 function loadTableData() {
+    // Populate the main table with localStorage data.
     let savedTableData = localStorage.getItem('tableData');
     const dataTable = document.getElementById('data');
     // console.log(savedTableData);
-    if (savedTableData) {
+    if (savedTableData) { // If there is local data, parse it and populate the table. Otherwise, show the splash screen.
         // Parse the saved data
         console.log('Found data, parsing')
         let parsedData = JSON.parse(savedTableData);
@@ -93,15 +95,15 @@ function loadTableData() {
         }
         reenumerateItems();
     } else {
-        // No data saved
+        // No data saved, show the splash screen
         console.log('No data found, creating placeholder text')
         addPlaceholderRow();
-        // Show splash screen:
         document.getElementById('modalForm').classList.remove('hidden');
     }
 }
 
 function addPlaceholderRow() {
+    // If there is no data on the table, put a placeholder text
     const dataTable = document.getElementById('data');
     let newRow = document.createElement('tr');
     newRow.id = 'placeholder-text';
@@ -123,6 +125,7 @@ const selectWrapperFn = function (event) {
 }
 
 function selectNone() {
+    // Clear 'selected' class to any item
     let elements = document.getElementsByClassName('selected');
     if (elements.length > 0) {
         elements[0].classList.remove('selected');
@@ -134,13 +137,11 @@ function selectNone() {
 }
 
 function selectElement(element) {
+    // Add the class 'selected' to the clicked element
     console.log('Selected item ' + element);
-    // First, clear any selected status
-    let elements = document.getElementsByClassName('selectable');
-    for (let currentElement of elements) {
-        currentElement.classList.remove('selected');
-    };
-    // Now, add selected class to the item
+    // First, clear any other selected status
+    selectNone();
+    // Now, add selected class to the clicked item
     document.getElementById(element).classList.add('selected');
     // Put the values on the input boxes for editing the values
     const getSelectedRow = document.getElementsByClassName('selected');
@@ -164,6 +165,7 @@ const saveUserInfoWrapper = function (event) {
 }
 
 function saveUserInfo(optionalElementID) {
+    // Save the user info table
     if (optionalElementID === undefined) {
         // Save all userinfo fields
         const userInfoElements = document.getElementsByClassName('infoTextBox');
@@ -190,6 +192,7 @@ function saveUserInfo(optionalElementID) {
 }
 
 function calculateAll() {
+    // Recalculate totals
     const multiplyByQtyElements = document.getElementsByClassName('multiplyByQty');
     const multiplyByValueElements = document.getElementsByClassName('multiplyByValue');
     const multiplyByTotalElements = document.getElementsByClassName('multiplyByTotal');
@@ -209,7 +212,7 @@ function calculateAll() {
 }
 
 function saveTestingData() {
-    // This function is for tessting, can be called from console.
+    // Add example data
     let data = {
         1: {
             field1: "25",
@@ -279,9 +282,11 @@ function saveTestingData() {
 }
 
 function addItem() {
+    // Add a new table item
     var cells = document.getElementsByClassName('newItemtextBox');
     var proceed = true;
     for (let n = 0; n < cells.length; n++) {
+        // Checking if there are blank editable text boxes, so ask the user to filling them before add an item
         if (!cells[n].classList.contains('readonlyTextBox')) {
             if (cells[n].value === '') {
                 proceed = false;
@@ -289,7 +294,7 @@ function addItem() {
             }
         }
     }
-    if (proceed) {
+    if (proceed) { // There are no blank text boxes, so proceed with adding new data
         let row = document.createElement('tr');
         // Get how many items are on the table
         let items = document.getElementsByClassName('selectable');
@@ -297,7 +302,7 @@ function addItem() {
         // Checks if there is a placeholder and take it out
         if (itemCounter === 1) {
             placeHolderRow = document.getElementById('placeholder-text');
-            if (placeHolderRow) {placeHolderRow.remove();}
+            if (placeHolderRow) { placeHolderRow.remove(); }
         }
         // Add a new item
         row.id = 'element-' + itemCounter;
@@ -342,6 +347,7 @@ function addItem() {
 }
 
 function replaceItem() {
+    // Modify current selected item with the data written on the editing text boxes
     var selectedItem = document.getElementsByClassName('selected');
     if (selectedItem.length > 0) {
         var cells = document.getElementsByClassName('newItemtextBox');
@@ -406,16 +412,19 @@ function replaceItem() {
 }
 
 function setFocusFirstInput() {
+    // Bring the cursor to the first editing text box for convenience
     const inputBoxes = document.getElementsByClassName('newItemtextBox');
     inputBoxes[0].focus();
 }
 
 function formatNumber(number) {
+    // Add thousands separators
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
 function deleteItem() {
-    // Search for a selected item
+    // Deletes an item
+    // Search for a selected item:
     let selectedItem = document.getElementsByClassName('selected');
     if (selectedItem.length > 0) {
         selectedItem[0].remove();
@@ -431,6 +440,7 @@ function deleteItem() {
 }
 
 function saveItems() {
+    // Save all the data on the main table to localStorage
     let data = {};
     const elements = document.getElementsByClassName('selectable');
     let n = 0;
@@ -454,6 +464,7 @@ function saveItems() {
 }
 
 function reenumerateItems() {
+    // Reassing IDs to every table item to ensures unique item's IDs.
     const elements = document.getElementsByClassName('selectable');
     let counter = 1;
     if (elements.length > 0) {
@@ -468,26 +479,30 @@ function reenumerateItems() {
 }
 
 function hideModal() {
+    // Hides modal splash screen
     document.getElementById('btOk').classList.add('hidden');
     document.getElementById('modalForm').classList.add('hidden');
 }
 
 function reloadPage() {
+    // Self explanatory
     location.reload();
 }
 
 function deleteSavedData() {
+    // Clear all localStorage data
     localStorage.clear();
     document.getElementById('btYes').classList.add('hidden');
     document.getElementById('btNo').classList.add('hidden');
     document.getElementById('status-title').innerText = "Eliminando datos";
     document.getElementById('status-text').innerText = "Espere...";
     document.getElementById('modalForm').classList.remove('hidden');
-    const reloadNow = setTimeout(reloadPage, 500);
+    const reloadNow = setTimeout(reloadPage, 200);
     return ('All data deleted');
 }
 
 function modalAlert(title, message) {
+    // Shows a full screen modal alert
     document.getElementById('btYes').classList.add('hidden');
     document.getElementById('btNo').classList.add('hidden');
     document.getElementById('btOk').classList.remove('hidden');
@@ -497,11 +512,13 @@ function modalAlert(title, message) {
 }
 
 function fillDateToday() {
+    // Change the start date with today's date
     document.getElementById('projectStartDate').value = getToday();
     saveUserInfo('projectStartDate');
 }
 
 function getToday() {
+    // What days is today?
     const date = new Date();
     const year = (date.getFullYear().toString());
     const month = String(date.getMonth() + 1).padStart(2, '0'); // Why 0 to 11, javascript?... why?....
@@ -511,6 +528,7 @@ function getToday() {
 }
 
 function fAlert(message, type) {
+    // Creates an unobtrusive small alert box for a few seconds, then destroys it without mercy
     const newAlert = document.createElement('div');
     newAlert.classList.add('alert-box');
     const newText = document.createElement('p');
@@ -533,11 +551,13 @@ function fAlert(message, type) {
     newAlert.id = alertID;
     document.getElementById('alert-area').appendChild(newAlert);
     const createdAlert = document.getElementById(alertID);
-    setTimeout(function () { createdAlert.classList.remove('alert-box-hidden'); 0 })
-    setTimeout(function () { createdAlert.classList.add('alert-box-hidden'); }, 3000)
+    setTimeout(function () { createdAlert.classList.remove('alert-box-hidden'); 0 });
+    setTimeout(function () { createdAlert.classList.add('alert-box-hidden'); }, 3000);
+    setTimeout(function () { createdAlert.remove(); }, 4000);
 }
 
 function print() {
+    // Creates a new window with its own format for printing the data
     selectNone();
     var divContents = `
     <h1 class="print-heading"><u>Presupuesto</u></h1>
@@ -578,14 +598,14 @@ function print() {
     <hr class="print-hr">
     <h3>${document.getElementById('userName').value}, ${document.getElementById('userBusiness').value}.</h3>
     `;
-    var printWindow = window.open('', '', 'height=800,width=800');
+    var printWindow = window.open('', '', 'height=900,width=800');
     printWindow.document.write('<html><head><link rel="preload" href="style.css" as="style"><link rel="stylesheet" href="assets/styles/style.css"><title>Print Contents</title>');
     printWindow.document.write('</head><body class="print-body">');
     printWindow.document.write(divContents);
     printWindow.document.write('</body></html>');
     // Fill the table with the data on the main table
     const tableContents = document.getElementsByClassName('selectable');
-    for(var n = 0; n < tableContents.length; n++) {
+    for (var n = 0; n < tableContents.length; n++) {
         printWindow.document.getElementById('tableContentsContainer').appendChild(tableContents[n].cloneNode(true));
     }
     printWindow.document.close();
