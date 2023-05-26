@@ -206,38 +206,62 @@ function saveTestingData() {
     // This function is for tessting, can be called from console.
     let data = {
         1: {
-            field1: "1",
-            field2: "Batimóvil",
-            field3: "1.500.000.000",
+            field1: "25",
+            field2: "Mesas",
+            field3: "45.000",
             field4: "readonly"
         },
         2: {
-            field1: "100",
-            field2: "Batigarras",
-            field3: "50.000",
+            field1: "26",
+            field2: "Sillas",
+            field3: "15.000",
             field4: "readonly"
         },
         3: {
             field1: "1",
-            field2: "Traje",
-            field3: "100.000.000",
+            field2: "Mesón del profesor",
+            field3: "170.000",
             field4: "readonly"
         },
         4: {
-            field1: "500",
-            field2: "Batarangs",
-            field3: "6.000.000",
+            field1: "1",
+            field2: "Silla del profesor",
+            field3: "25.000",
+            field4: "readonly"
+        },
+        5: {
+            field1: "1",
+            field2: "Pizarrón para plumon",
+            field3: "220.000",
+            field4: "readonly"
+        },
+        6: {
+            field1: "1",
+            field2: "Reloj de pared, análogo",
+            field3: "12.000",
+            field4: "readonly"
+        },
+        7: {
+            field1: "1",
+            field2: "Libro de curso",
+            field3: "24.600",
+            field4: "readonly"
+        },
+        8: {
+            field1: "2",
+            field2: "Muebles archivadores",
+            field3: "78.000",
             field4: "readonly"
         }
     }
     let jsonData = JSON.stringify(data);
     localStorage.setItem('tableData', jsonData);
-    localStorage.setItem('userName', 'Pepito');
-    localStorage.setItem('userBusiness', 'Pepito y Hnos. SA');
-    localStorage.setItem('userProjectName', 'Sitio Web CRUD');
-    localStorage.setItem('userProjectCode', 'Pepito-001');
-    localStorage.setItem('projectDestName', 'Juanito');
-    localStorage.setItem('projectDestBusiness', 'Juanito LTDA');
+    localStorage.setItem('userName', 'Juan Casas Flores');
+    localStorage.setItem('userBusiness', 'Muebles Flores Ltda.');
+    localStorage.setItem('userProjectName', 'Habilitación Sala Clases');
+    localStorage.setItem('userProjectCode', 'FL-2033');
+    localStorage.setItem('projectDestName', 'Sr. José Cuevas');
+    localStorage.setItem('projectDestBusiness', 'Escuela Los Álamos');
     localStorage.setItem('projectStartDate', '2023-05-24');
     localStorage.setItem('projectEndDate', '2023-05-30');
     document.getElementById('btYes').classList.add('hidden');
@@ -315,7 +339,7 @@ function replaceItem() {
             if (!cells[n].classList.contains('readonlyTextBox')) {
                 if (cells[n].value === '') {
                     proceed = false;
-                    fAlert('Por favor, ingrese todos los campos', 'warning');
+                    fAlert('Por favor, rellene todos los campos', 'warning');
                 }
             }
         }
@@ -362,6 +386,7 @@ function replaceItem() {
             saveItems();
             fAlert('Registro modificado', 'info');
             calculateAll();
+            reenumerateItems();
             setFocusFirstInput();
         }
     } else {
@@ -494,17 +519,19 @@ function fAlert(message, type) {
     const ms = date.getMilliseconds().toString();
     const alertID = 'alert' + ms;
     newAlert.id = alertID;
-    document.getElementById('main-body').appendChild(newAlert);
+    document.getElementById('alert-area').appendChild(newAlert);
     const createdAlert = document.getElementById(alertID);
     setTimeout(function () { createdAlert.classList.remove('alert-box-hidden'); 0 })
     setTimeout(function () { createdAlert.classList.add('alert-box-hidden'); }, 3000)
 }
 
 function print() {
+    selectNone();
     var divContents = `
-    <h1 class="print-heading">Presupuesto</h1>
+    <h1 class="print-heading"><u>Presupuesto</u></h1>
     <h2 class="print-subheading">${document.getElementById('userBusiness').value} </h2>
     <h4 class="print-subheading">${document.getElementById('userName').value} </h4>
+    <h4 class="print-subheading">${document.getElementById('projectStartDate').value} </h4>
     <div class="print-space"></div>
     <hr>
     <div class="flex-row">
@@ -519,7 +546,7 @@ function print() {
     </div>
     <div class="print-space"></div>
     <h2>Estimado/a ${document.getElementById('projectDestName').value},</h2>
-    <p>A continuación, se detalla el presupuesto para el proyecto <strong>${document.getElementById('userProjectName').value}</strong>, vigente desde el ${document.getElementById('projectStartDate').value} hasta el ${document.getElementById('projectEndDate').value}.</p>
+    <p class="print-text">A continuación, se detalla el presupuesto para el proyecto <strong>${document.getElementById('userProjectName').value}</strong>, vigente desde el ${document.getElementById('projectStartDate').value} hasta el ${document.getElementById('projectEndDate').value}.</p>
     <div class="print-space"></div>
     <table class="print-table">
         <tbody id="tableContentsContainer">
@@ -533,10 +560,10 @@ function print() {
     </table>
     <h3 class="right-align">Total: $ ${document.getElementById('total').innerText}</h3>
     <div class="print-space"></div>
-    <p>Agradecemos comunicarse con nosotros para aceptar lo propuesto antes de la fecha de vigencia.</p>
-    <p>Atentamente, </p>
-    <div class="print-space"></div>
-    <div class="print-space"></div>
+    <p class="print-text">Agradecemos comunicarse con nosotros para aceptar lo propuesto antes de la fecha de vigencia.</p>
+    <p class="print-text">Atentamente, </p>
+    <div class="print-space-big"></div>
+    <hr>
     <h3>${document.getElementById('userName').value}, ${document.getElementById('userBusiness').value}.</h3>
     `;
     var printWindow = window.open('', '', 'height=800,width=800');

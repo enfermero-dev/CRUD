@@ -25,19 +25,23 @@
     </header>
     <div class="main-layout">
         <main>
-            <h3>Sistema de presupuestos </h3>
-            <p>Agregue elementos a la tabla, puede editar la información general en el apartado 'Información General'.</p>
-            <p class="aside-note">
-                Los datos se guardarán localmente, se eliminan si realiza una limpieza del navegador o si utiliza el modo incógnito.
-            </p>
+            <div class="main-info">
+                <h3>Sistema de presupuestos </h3>
+                <p>Agregue elementos a la tabla, puede editar la información general en el apartado 'Información
+                    General'.</p>
+                <p class="aside-note">
+                    Los datos se guardarán localmente, se eliminan si realiza una limpieza del navegador o si utiliza el
+                    modo incógnito.
+                </p>
+            </div>
+            <div class="edit-buttons">
+                <input type="button" value="Añadir" class="edit-button" id="btAddItem">
+                <input type="button" value="Modificar" class="edit-button" id="btEditItem">
+                <input type="button" value="Deseleccionar" class="edit-button" id="btDeselect">
+                <input type="button" value="Eliminar" class="edit-button red" id="btDeleteItem">
+                <input type="button" value="Imprimir" class="edit-button" id="btPrint">
+            </div>
             <div class="table-area">
-                <div class="edit-buttons">
-                    <input type="button" value="Añadir" class="edit-button" id="btAddItem">
-                    <input type="button" value="Modificar" class="edit-button" id="btEditItem">
-                    <input type="button" value="Deseleccionar" class="edit-button" id="btDeselect">
-                    <input type="button" value="Eliminar" class="edit-button" id="btDeleteItem">
-                    <input type="button" value="Imprimir" class="edit-button" id="btPrint">
-                </div>
                 <table class="table-items">
                     <tbody id="data">
                         <tr>
@@ -47,11 +51,17 @@
                             <th>Precio total</th>
                         </tr>
                         <tr class="editingArea" id="editingArea">
-                            <td><input type="text" id="field1" class="editing-text-box newItemtextBox" data-classes="multiplyByQty"></td>
-                            <td><input type="text" id="field2" class="editing-text-box newItemtextBox"></td>
-                            <td><input type="number" id="field3" class="editing-text-box newItemtextBox" data-classes="right-align price multiplyByValue">
+                            <td><input placeholder="Cantidad" type="number" id="field1"
+                                    class="editing-text-box newItemtextBox" data-classes="multiplyByQty"></td>
+                            <td><input placeholder="Item" type="text" id="field2"
+                                    class="editing-text-box newItemtextBox"></td>
+                            <td><input placeholder="Precio unitario" type="number" id="field3"
+                                    class="editing-text-box newItemtextBox"
+                                    data-classes="right-align price multiplyByValue">
                             </td>
-                            <td><input type="text" id="totalValue" class="editing-text-box newItemtextBox readonlyTextBox" data-classes="multiplyByTotal right-align price" disabled></td>
+                            <td><input type="text" id="totalValue"
+                                    class="editing-text-box newItemtextBox readonlyTextBox"
+                                    data-classes="multiplyByTotal right-align price" disabled></td>
                         </tr>
                     </tbody>
                 </table>
@@ -67,17 +77,30 @@
             <div class="aside-panel">
                 <div>
                     <h2>Información General</h2>
-                    <label for="userName">Nombre <input type="text" name="userName" id="userName" class="input-box infoTextBox"placeholder="Su nombre"></label>
-                    <label for="userBusiness">Empresa <input type="text" name="userBusiness" id="userBusiness" class="input-box infoTextBox" placeholder="Nombre de su empresa"></label>
-                    <label for="userProjectName">Nombre proyecto<input type="text" name="userProjectName" id="userProjectName" class="input-box infoTextBox" placeholder="Nombre del proyecto"></label>
-                    <label for="userProjectCode">Código proyecto<input type="text" name="userProjectCode" id="userProjectCode" class="input-box infoTextBox" placeholder="Código (opcional)"></label>
-                    <label for="projectDestName">Destinatario<input type="text" name="projectDestName" id="projectDestName" class="input-box infoTextBox" placeholder="Nombre del destinatario"></label>
-                    <label for="projectDestBusiness">Empresa del destinatario<input type="text" name="projectDestBusiness" id="projectDestBusiness" class="input-box infoTextBox" placeholder="Nombre de la empresa"></label>
-                    <label for="projectStartDate">Fecha de emisión <input type="date" name="projectStartDate" id="projectStartDate" class="input-box infoTextBox" placeholder="Su nombre"><input type="button" value="Hoy" id="btToday" class="edit-button"></label>
-                    <label for="projectEndDate">Fecha de vigencia <input type="date" name="projectEndDate" id="projectEndDate" class="input-box infoTextBox" placeholder="Su nombre"></label>
+                    <label for="userName">Nombre <input type="text" name="userName" id="userName"
+                            class="input-box infoTextBox" placeholder="Su nombre"></label>
+                    <label for="userBusiness">Empresa <input type="text" name="userBusiness" id="userBusiness"
+                            class="input-box infoTextBox" placeholder="Nombre de su empresa"></label>
+                    <label for="userProjectName">Nombre proyecto<input type="text" name="userProjectName"
+                            id="userProjectName" class="input-box infoTextBox"
+                            placeholder="Nombre del proyecto"></label>
+                    <label for="userProjectCode">Código proyecto<input type="text" name="userProjectCode"
+                            id="userProjectCode" class="input-box infoTextBox" placeholder="Código (opcional)"></label>
+                    <label for="projectDestName">Destinatario<input type="text" name="projectDestName"
+                            id="projectDestName" class="input-box infoTextBox"
+                            placeholder="Nombre del destinatario"></label>
+                    <label for="projectDestBusiness">Empresa del destinatario<input type="text"
+                            name="projectDestBusiness" id="projectDestBusiness" class="input-box infoTextBox"
+                            placeholder="Nombre de la empresa"></label>
+                    <label for="projectStartDate">Fecha de emisión <input type="date" name="projectStartDate"
+                            id="projectStartDate" class="input-box infoTextBox" placeholder="Su nombre"><input
+                            type="button" value="Hoy" id="btToday" class="edit-button"></label>
+                    <label for="projectEndDate">Fecha de vigencia <input type="date" name="projectEndDate"
+                            id="projectEndDate" class="input-box infoTextBox" placeholder="Su nombre"></label>
                 </div>
                 <div>
-                    <p class="warning">ADVERTENCIA: Este botón eliminará de forma inmediata toda la información guardada.</p>
+                    <p class="warning">ADVERTENCIA: Este botón eliminará de forma inmediata toda la información
+                        guardada.</p>
                     <input type="button" value="Limpiar todo" class="edit-button red" id="btDelete">
                 </div>
             </div>
@@ -85,7 +108,9 @@
         <div class="modal-form hidden" id="modalForm">
             <div class="modal-form-content">
                 <h2 id="status-title">Le damos la bienvenida al creador de presupuestos</h2>
-                <p id="status-text">No se han encontrado datos locales. Recuerde que esta aplicación sólo trabaja con datos que se almacenan en su navegador, y estos se eliminarán si realiza una limpieza de su navegador o activa el modo incógnito.
+                <p id="status-text">No se han encontrado datos locales. Recuerde que esta aplicación sólo trabaja con
+                    datos que se almacenan en su navegador, y estos se eliminarán si realiza una limpieza de su
+                    navegador o activa el modo incógnito.
                     ¿Desea rellenar con datos de demostración? <br>Si no lo desea, se generará una tabla en blanco.</p>
                 <div class="question-buttons">
                     <input type="button" value="Si" id="btYes" class="edit-button">
@@ -95,6 +120,7 @@
             </div>
         </div>
     </div>
+    <div class="alert-area-container" id="alert-area"></div>
 </body>
 
 </html>

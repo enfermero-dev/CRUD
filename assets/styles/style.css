@@ -32,9 +32,15 @@ body {
     color: var(--color-primary-normal);
 }
 
+@media (min-width: 950px) {
+    body {
+        margin-bottom: 40px;
+    }
+}
+
 /* Top header */
 header {
-    width: 100%;
+    width: 100vw;
     height: 300px;
     background-size: cover;
     background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 1)), url('../img/desk.png');
@@ -55,12 +61,14 @@ header {
 /* - Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
+
 /* - Firefox */
 input[type=number] {
-  -moz-appearance: textfield;
+    -moz-appearance: textfield;
+    appearance: textfield;
 }
 
 .input-box {
@@ -87,15 +95,23 @@ input[type=number] {
 }
 
 .main-layout {
-    margin: 20px;
+    /* margin: 20px; */
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
     justify-content: space-between;
 }
 
+.main-info {
+    padding: 20px;
+}
+
+.edit-buttons {
+    padding: 0 20px;
+}
+
 .table-area {
-    margin-top: 20px;
+    padding: 0 20px;
 }
 
 .table-items {
@@ -105,9 +121,23 @@ input[type=number] {
     width: 100%;
 }
 
-.table-superitems td {
+@media (max-width:550px) {
+    .table-area {
+        width: 100vw;
+        overflow: scroll;
+    }
+
+    .table-items {
+        min-width: 550px;
+        width: 85vw;
+    }
+}
+
+.table-items td {
     margin: 0;
 }
+
+
 
 .placeholder-text {
     font-style: italic;
@@ -169,14 +199,23 @@ td {
     margin-bottom: 10px;
 }
 
+@media (max-width:760px) {
+    .edit-buttons {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 5px;
+    }
+
+}
+
 .edit-button {
-    padding: 10px 30px;
+    padding: 10px 15px;
     border-radius: 20px;
     border: none;
     background-color: var(--color-edit-button-bg-normal);
     color: var(--color-edit-button-primary-normal);
     font-weight: bold;
-    font-size: large;
+    font-size:medium;
 }
 
 .red {
@@ -234,13 +273,15 @@ td {
 
 aside {
     margin-left: 20px;
-    border: solid 1px var(--color-primary-normal);
     min-width: 300px;
-    padding: 10px;
-    border-radius: 10px;
+    padding: 20px;
+    /* padding-top: 0; */
 }
 
 .aside-panel {
+    padding: 10px;
+    border: solid 1px var(--color-primary-normal);
+    border-radius: 10px;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -256,6 +297,12 @@ label {
     font-size: large;
 }
 
+@media(max-width: 760px) {
+    label {
+        flex-direction: column;
+    }
+}
+
 @media (max-width:950px) {
     .main-layout {
         flex-wrap: wrap;
@@ -266,6 +313,7 @@ label {
         margin-left: 0;
         min-width: none;
         width: 100%;
+        padding-top: 0;
     }
 }
 
@@ -317,19 +365,24 @@ aside :not(h1, h2, h3, h4, h5, h6) {
 
 /* Alerts */
 
+.alert-area-container {
+    display: flex;
+    justify-content: center;
+}
+
 .alert-box {
     transition: opacity 200ms linear;
     transition: top 200ms;
     opacity: 100;
     position: fixed;
-    top: 92vh;
-    width: 100vw;
+    top: 5px;
     display: flex;
     justify-content: center;
 }
 
 .alert-box p {
     font-weight: bold;
+    text-align: center;
     font-size: large;
     padding: 10px 20px;
     box-shadow: 0 0 30px var(--color-table-border-normal);
@@ -339,7 +392,7 @@ aside :not(h1, h2, h3, h4, h5, h6) {
 .alert-box-hidden {
     transition: 500ms linear;
     opacity: 0;
-    top: 100vh;
+    top: -20px;
 }
 
 .alert-box-info {
@@ -368,6 +421,11 @@ aside :not(h1, h2, h3, h4, h5, h6) {
 .print-heading {
     text-align: center;
     font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.print-text {
+    font-weight: bold;
 }
 
 .print-subheading {
@@ -379,6 +437,7 @@ aside :not(h1, h2, h3, h4, h5, h6) {
     flex-direction: row;
     width: 100%;
 }
+
 .flex-col {
     width: 50%;
     display: flex;
@@ -389,6 +448,17 @@ aside :not(h1, h2, h3, h4, h5, h6) {
     height: 20px;
 }
 
+.print-space-big {
+    height: 60px;
+}
+
 .print-table {
     width: 100%;
+    border-collapse: collapse;
+}
+
+.print-table tbody tr th,
+.print-table tbody tr td {
+    padding: 2px 5px;
+    margin: 0;
 }
