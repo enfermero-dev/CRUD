@@ -257,7 +257,7 @@ function saveTestingData() {
     let jsonData = JSON.stringify(data);
     localStorage.setItem('tableData', jsonData);
     localStorage.setItem('userName', 'Juan Casas Flores');
-    localStorage.setItem('userBusiness', 'Muebles Flores Ltda.');
+    localStorage.setItem('userBusiness', 'Muebles Flores Ltda');
     localStorage.setItem('userProjectName', 'Habilitación Sala Clases');
     localStorage.setItem('userProjectCode', 'FL-2033');
     localStorage.setItem('projectDestName', 'Sr. José Cuevas');
@@ -533,7 +533,7 @@ function print() {
     <h4 class="print-subheading">${document.getElementById('userName').value} </h4>
     <h4 class="print-subheading">${document.getElementById('projectStartDate').value} </h4>
     <div class="print-space"></div>
-    <hr>
+    <hr class="print-hr">
     <div class="flex-row">
         <div class="flex-col">
             <h4 class="print-subheading">A nombre de: ${document.getElementById('userProjectName').value} </h4>
@@ -563,7 +563,7 @@ function print() {
     <p class="print-text">Agradecemos comunicarse con nosotros para aceptar lo propuesto antes de la fecha de vigencia.</p>
     <p class="print-text">Atentamente, </p>
     <div class="print-space-big"></div>
-    <hr>
+    <hr class="print-hr">
     <h3>${document.getElementById('userName').value}, ${document.getElementById('userBusiness').value}.</h3>
     `;
     var printWindow = window.open('', '', 'height=800,width=800');
