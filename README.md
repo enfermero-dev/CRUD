@@ -4,7 +4,9 @@ A quick project budget creator made on HTML5, CSS and JavaScript, using your bro
 
 ## Description
 
-.
+A budget creator that uses locaStorage to save data, with a general information field and a table with editable items for each product. Also, it has printing capabilities.
+
+/// TODO
 
 ## Landing page Wireframe
 
