@@ -91,21 +91,27 @@ function loadTableData() {
             document.getElementById('element-' + n).addEventListener('click', selectWrapperFn);
             calculateAll()
         }
+        reenumerateItems();
     } else {
         // No data saved
         console.log('No data found, creating placeholder text')
-        let newRow = document.createElement('tr');
-        newRow.id = 'placeholder-text';
-        newRow.className = 'placeholder-text';
-        let newCell = document.createElement('td');
-        newCell.colSpan = 4;
-        let cellText = document.createTextNode('Añada un elemento haciendo click en "Agregar"');
-        newCell.appendChild(cellText);
-        newRow.appendChild(newCell);
-        dataTable.appendChild(newRow);
+        addPlaceholderRow();
         // Show splash screen:
         document.getElementById('modalForm').classList.remove('hidden');
     }
+}
+
+function addPlaceholderRow() {
+    const dataTable = document.getElementById('data');
+    let newRow = document.createElement('tr');
+    newRow.id = 'placeholder-text';
+    newRow.className = 'placeholder-text';
+    let newCell = document.createElement('td');
+    newCell.colSpan = 4;
+    let cellText = document.createTextNode('Sin elementos. Rellene los campos y haga click en "Agregar"');
+    newCell.appendChild(cellText);
+    newRow.appendChild(newCell);
+    dataTable.appendChild(newRow);
 }
 
 const selectWrapperFn = function (event) {
@@ -288,6 +294,11 @@ function addItem() {
         // Get how many items are on the table
         let items = document.getElementsByClassName('selectable');
         let itemCounter = items.length + 1; // Adding one for the new item
+        // Checks if there is a placeholder and take it out
+        if (itemCounter === 1) {
+            placeHolderRow = document.getElementById('placeholder-text');
+            if (placeHolderRow) {placeHolderRow.remove();}
+        }
         // Add a new item
         row.id = 'element-' + itemCounter;
         row.classList.add('selectable');
@@ -451,6 +462,7 @@ function reenumerateItems() {
         }
         console.log('Elements reenumerated (' + counter + ' total)');
     } else {
+        addPlaceholderRow();
         console.log('No elements found');
     }
 }
@@ -567,7 +579,7 @@ function print() {
     <h3>${document.getElementById('userName').value}, ${document.getElementById('userBusiness').value}.</h3>
     `;
     var printWindow = window.open('', '', 'height=800,width=800');
-    printWindow.document.write('<html><head><link rel="stylesheet" href="assets/styles/style.css"><title>Print Contents</title>');
+    printWindow.document.write('<html><head><link rel="preload" href="style.css" as="style"><link rel="stylesheet" href="assets/styles/style.css"><title>Print Contents</title>');
     printWindow.document.write('</head><body class="print-body">');
     printWindow.document.write(divContents);
     printWindow.document.write('</body></html>');
