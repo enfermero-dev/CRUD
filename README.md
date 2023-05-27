@@ -6,26 +6,20 @@ A quick project budget creator made on HTML5, CSS and JavaScript, using your bro
 
 A budget creator that uses locaStorage to save data, with a general information field and a table with editable items for each product. Also, it has printing capabilities.
 
-/// TODO
-
-## Landing page Wireframe
-
-[Here](https://github.com/MarceloAndresMendoza/landing_venta/blob/main/maqueta-astromart.jpg) you can view a wireframe of the website, with the initial idea.
-
 ## Visuals and preview 👀
 
-You can view the current deployed version [here](https://marceloandresmendoza.github.io/landing_venta/)!
+You can view the current deployed version [here](https://marceloandresmendoza.github.io/CRUD/)!
 
 ## How to clone 🚀
 
 You can just fork this project or clone it by GIT:
 ```bash
-> git clone https://github.com/MarceloAndresMendoza/landing_venta
+> git clone https://github.com/MarceloAndresMendoza/CRUD
 ```
 
 ### Pre-requisites 📋
 
-None from another world, just a webserver like apache running locally.
+Nonhing special, just a webserver like apache running locally.
 
 
 ## Built with 🛠️
@@ -35,11 +29,12 @@ Tools used to create the project
 * [VCS](https://code.visualstudio.com/Download) - Visual Code Studio
 * HTML5 - Languaje
 * CSS - Styles
+* JavaScript (ECMAScript6) - Logic
 
 ## Versioning 📌
 
 Version control system [Git](https://git-scm.com).
-For all available versions, check out the [tags in this repository](https://github.com/MarceloAndresMendoza/landing_venta/tags).
+For all available versions, check out the [tags in this repository](https://github.com/MarceloAndresMendoza/CRUD/tags).
 
 ## Authors ✒️
 
