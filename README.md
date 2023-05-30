@@ -8,6 +8,8 @@ A budget creator that uses locaStorage to save data, with a general information 
 
 ## Visuals and preview 👀
 
+![Splash](https://github.com/MarceloAndresMendoza/CRUD/assets/126836625/e9e09476-fe4a-4ca2-bc88-db5684d061cc)
+
 You can view the current deployed version [here](https://marceloandresmendoza.github.io/CRUD/)!
 
 ## How to clone 🚀
