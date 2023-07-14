@@ -592,7 +592,7 @@ function print() {
     selectNone();
     var divContents = `
     <h1 class="print-heading"><u>Presupuesto</u></h1>
-    <h2 class="print-subheading">${document.getElementById('userBusiness').value} </h2>
+    <h2 class="print-subheading">${document.getElementById('userBusiness').value} - ${document.getElementById('userID').value} </h2>
     <h4 class="print-subheading">${document.getElementById('userName').value} </h4>
     <h4 class="print-subheading">${document.getElementById('projectStartDate').value} </h4>
     <div class="print-space"></div>
@@ -601,6 +601,7 @@ function print() {
         <div class="flex-col">
             <h4 class="print-subheading">A nombre de: ${document.getElementById('userProjectName').value} </h4>
             <h4 class="print-subheading">Empresa: ${document.getElementById('projectDestBusiness').value} </h4>
+            <h4 class="print-subheading">RUT: ${document.getElementById('businessID').value} </h4>
         </div>
         <div class="flex-col">
             <h4 class="print-subheading">Nombre del proyecto: ${document.getElementById('userProjectName').value} </h4>
@@ -644,8 +645,8 @@ function print() {
         const tableIVA = document.getElementById('IVA').cloneNode(true);
         printWindow.document.getElementById('IVAtablecontainer').appendChild(tableIVA);
     }
-    printWindow.document.close();
-    setTimeout(function () { printWindow.print(); }, 500);
+    setTimeout(function () { printWindow.document.close();; }, 500);
+    setTimeout(function () { printWindow.print(); }, 1000);
 }
 
 init();
