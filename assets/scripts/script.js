@@ -621,6 +621,7 @@ function print() {
             </tr>
         </tbody>
     </table>
+    <table id="IVAtablecontainer" class="print-table"></table>
     <h3 class="right-align">Total: $ ${document.getElementById('total').innerText}</h3>
     <div class="print-space"></div>
     <p class="print-text">Agradecemos comunicarse con nosotros para aceptar lo propuesto antes de la fecha de vigencia.</p>
@@ -638,6 +639,10 @@ function print() {
     const tableContents = document.getElementsByClassName('selectable');
     for (var n = 0; n < tableContents.length; n++) {
         printWindow.document.getElementById('tableContentsContainer').appendChild(tableContents[n].cloneNode(true));
+    }
+    if (checkIVA()) {
+        const tableIVA = document.getElementById('IVA').cloneNode(true);
+        printWindow.document.getElementById('IVAtablecontainer').appendChild(tableIVA);
     }
     printWindow.document.close();
     setTimeout(function () { printWindow.print(); }, 500);
