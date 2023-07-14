@@ -65,6 +65,19 @@
                         </tr>
                     </tbody>
                 </table>
+                <table id="IVA" class="table-items">
+                    <tr>
+                        <th colspan="4" style="text-align: start;">IVA</th>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="text-align: start;">Subtotal</td>
+                        <td style="text-align: end;" id="subtotal">-</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="text-align: start;">19%</td>
+                        <td style="text-align: end;" id="IVAvalue">-</td>
+                    </tr>
+                </table>
                 <div class="table-footer">
                     <div class="spaciator"></div>
                     <div class="total" id="total">
@@ -97,6 +110,7 @@
                             type="button" value="Hoy" id="btToday" class="edit-button"></label>
                     <label for="projectEndDate">Fecha de vigencia <input type="date" name="projectEndDate"
                             id="projectEndDate" class="input-box infoTextBox" placeholder="Su nombre"></label>
+                    <label for="needIVA">Aplica IVA <input type="checkbox" class="input-box infoTextBox" value="false" name="needIVA" id="needIVA"></label>
                 </div>
                 <div>
                     <p class="warning">ADVERTENCIA: Este botón eliminará de forma inmediata toda la información

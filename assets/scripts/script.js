@@ -12,6 +12,12 @@ function init() {
     fBindID('btDeselect', 'click', selectNone);
     fBindID('btEditItem', 'click', replaceItem);
     fBindID('btPrint', 'click', print);
+    fBindID('needIVA', 'click', calculateAll);
+}
+
+function checkIVA() {
+    const needsIVA = document.getElementById('needIVA').checked;
+    return needsIVA;
 }
 
 function fBindID(elementId, event, method) {
@@ -40,7 +46,13 @@ function loadUserInfo() {
     for (let n = 0; n < infoDataElement.length; n++) {
         // Iterate in each inputbox
         let savedInfoData = localStorage.getItem(infoDataElement[n].id);
-        infoDataElement[n].value = savedInfoData;
+        if (infoDataElement[n].type == 'checkbox') {
+            if (savedInfoData == 'true') {
+                infoDataElement[n].checked = true;
+            }
+        } else {
+            infoDataElement[n].value = savedInfoData;
+        }
         if (infoDataElement[n].type == 'text') {
             // Put a listener to save this value on text change
             infoDataElement[n].addEventListener('keyup', saveUserInfoWrapper);
@@ -174,7 +186,11 @@ function saveUserInfo(optionalElementID) {
             if (userInfoElements[n].classList.contains('readonly')) {
                 newValue = 'readonly';
             } else {
-                newValue = userInfoElements[n].value;
+                if (userInfoElements[n].type == 'checkbox') {
+                    newValue = infoDataElement[n].checked;
+                } else {
+                    newValue = infoDataElement[n].value;
+                }
             }
             localStorage.setItem(userInfoElements[n].id, newValue);
         }
@@ -185,7 +201,11 @@ function saveUserInfo(optionalElementID) {
         if (userInfoElement.classList.contains('readonly')) {
             newValue = 'readonly';
         } else {
-            newValue = userInfoElement.value;
+            if (userInfoElement.type == 'checkbox') {
+                newValue = userInfoElement.checked;
+            } else {
+                newValue = userInfoElement.value;
+            }
         }
         localStorage.setItem(optionalElementID, newValue);
     }
@@ -196,6 +216,8 @@ function calculateAll() {
     const multiplyByQtyElements = document.getElementsByClassName('multiplyByQty');
     const multiplyByValueElements = document.getElementsByClassName('multiplyByValue');
     const multiplyByTotalElements = document.getElementsByClassName('multiplyByTotal');
+    const IVAvalue = document.getElementById('IVAvalue');
+    const subtotalValue = document.getElementById('subtotal');
     for (n = 0; n < multiplyByTotalElements.length; n++) {
         multiplyByTotalElements[n].innerText = formatNumber(
             Number(multiplyByQtyElements[n].innerText) * Number(multiplyByValueElements[n].innerText.replace(/\./g, ""))
@@ -207,7 +229,16 @@ function calculateAll() {
     for (n = 0; n < getSubTotals.length; n++) {
         valSum += Number(getSubTotals[n].innerText.replace(/\./g, ""));
     }
-    calcTotal.innerText = formatNumber(valSum);
+    let valIVA = valSum * 0.19;
+    if (checkIVA()) {
+        IVAvalue.innerText = "$ " + formatNumber(valIVA );
+        subtotalValue.innerText = "$ " + formatNumber(valSum);
+        calcTotal.innerText = formatNumber(valSum + valIVA);
+    } else {
+        IVAvalue.innerText = "-"
+        subtotalValue.innerText = "-";
+        calcTotal.innerText = formatNumber(valSum);
+    }
 
 }
 
