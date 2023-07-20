@@ -1,3 +1,5 @@
+// Marcelo Mendoza 2023 - Licencia GNU v3 - https://github.com/MarceloAndresMendoza
+
 function init() {
     loadUserInfo(); // Carga la información general de la tabla anexa
     loadTableData(); // Carga la información de la tabla principal
